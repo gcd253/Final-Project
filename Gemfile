@@ -21,6 +21,12 @@ gem 'active_model_serializers'
 # Rack
 gem 'rack', '~> 2.2', '>= 2.2.4'
 
+# Action Text and i dont even know what its for :'(
+gem 'actiontext', '~> 7.0', '>= 7.0.3.1'
+
+# Image processing
+gem 'image_processing', '~> 1.12', '>= 1.12.1'
+
 # CORS gem
 gem 'rack-cors', '~> 1.1', '>= 1.1.1'
 
@@ -43,3 +49,5 @@ group :development do
   # gem "spring"
 end
 
+
+gem "jsonapi-serializer", "~> 2.2"

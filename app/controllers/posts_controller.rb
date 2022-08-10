@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   def index
     @posts = Post.all
-    render json: @posts, status: :ok
+    render json: PostandimageSerializer.new(@posts).serializable_hash[:data][:attributes]
   end
 
   # GET /posts/1
@@ -15,13 +15,8 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
-
-    if @post.save
-      redirect_to @post, notice: "Post was successfully created."
-    else
-      render :new, status: :unprocessable_entity
-    end
+    @post = Post.create!(post_params)
+    render json: PostandimageSerializer.new(@post).serializable_hash[:data][:attributes]
   end
 
   # PATCH/PUT /posts/1
@@ -47,6 +42,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.permit(:name, :description, :user_id, :condition, :category)
+      params.permit(:name, :description, :user_id, :condition, :category, :image)
     end
 end

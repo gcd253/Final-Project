@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import BrowseItems from './components/BrowseItems';
-import Messages from './components/Messages';
+import MyActivities from './components/MyActivities';
 import OfferItem from './components/OfferItem';
 import ItemDetails from './components/ItemDetails';
 import { useEffect, useState } from 'react'
@@ -24,13 +24,28 @@ function App() {
       .then(selectedCard => setPostId(selectedCard.id))
   }
 
+  function uploadPost(data) {
+
+    fetch('/posts', {
+      method: 'POST',
+      body: data,
+    })
+      .then(res => res.json())
+      .then(success => {
+        console.log(success.image_url)
+      })
+      .catch(error => console.error(error)
+    );
+  }
+  
+
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar />
         <Routes>
           <Route path="/" element={<BrowseItems postData={postData} selectCard={handleSelect} />} />
-          <Route path="/messages" element={<Messages />} />
+          <Route path="/messages" element={<MyActivities uploadPost={uploadPost} />} />
           <Route path="/new-offer" element={<OfferItem />} />
           { useEffect(() => {
             console.log(postId)
