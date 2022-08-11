@@ -26,8 +26,13 @@ const FileForm = ({ uploadPost }) => {
 
         const data = new FormData();
 
-        data.append('post[details]', postDetails);
-        data.append('post[image]', e.target.image.files[0]);
+        data.append('name', postDetails.name);
+        data.append('description', postDetails.description)
+        data.append('condition', postDetails.condition);
+        data.append('category', postDetails.category)
+        data.append('user_id', 1)
+
+        data.append('image', e.target.image.files[0]);
         uploadPost(data);
     }
 

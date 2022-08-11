@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   def index
     @posts = Post.all
-    render json: PostandimageSerializer.new(@posts).serializable_hash[:data][:attributes]
+    render json: @posts #PostandimageSerializer.new(@posts).serializable_hash[:data][:attributes]
   end
 
   # GET /posts/1
@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.create!(post_params)
-    render json: PostandimageSerializer.new(@post).serializable_hash[:data][:attributes]
+    render json: @post #PostandimageSerializer.new(@post).serializable_hash[:data][:attributes]
   end
 
   # PATCH/PUT /posts/1
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
     redirect_to posts_url, notice: "Post was successfully destroyed."
   end
 
-  private
+private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
@@ -44,4 +44,5 @@ class PostsController < ApplicationController
     def post_params
       params.permit(:name, :description, :user_id, :condition, :category, :image)
     end
+  
 end

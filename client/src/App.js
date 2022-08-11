@@ -32,7 +32,7 @@ function App() {
     })
       .then(res => res.json())
       .then(success => {
-        console.log(success.image_url)
+        console.log(success)
       })
       .catch(error => console.error(error)
     );
@@ -48,7 +48,7 @@ function App() {
           <Route path="/messages" element={<MyActivities uploadPost={uploadPost} />} />
           <Route path="/new-offer" element={<OfferItem />} />
           { useEffect(() => {
-            console.log(postId)
+            // console.log(postId)
           }, [postId])
           }
         </Routes>
