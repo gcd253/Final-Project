@@ -37,7 +37,7 @@ const FileForm = ({ uploadPost, newPostImage }) => {
     }
 
     return (
-        <div>
+        <div className="bg-gray-200">
             <form onSubmit={e => handleSubmit(e)} >
                 <label>Item name:</label>
                 <input

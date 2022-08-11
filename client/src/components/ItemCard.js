@@ -10,7 +10,7 @@ const ItemCard = ({ name, des, condition, category, id, selectCard, imageUrl }) 
         <h3>{des}</h3>
         <p>Category: {category}</p>
         <p>Condition: {condition}</p>
-        <div className="bg-gray-100 z-10 text-xs uppercase font-bold rounded-full p-2 absolute top-0 ml-2 mt-2 hover:scale-[1.03] duration-500">
+        <div className="bg-gray-100 z-10 text-xs uppercase font-bold rounded-full p-2 absolute top-0 ml-2 mt-2 hover:scale-[1.03] duration-500 opacity-40 hover:opacity-90">
           <span>View Details</span>
         </div>
       </div>
