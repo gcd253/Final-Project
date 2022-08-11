@@ -8,12 +8,12 @@ puts '🌱 seeding data...'
     User.create(username: Faker::Internet.username, email: Faker::Internet.free_email, password_digest: Faker::Internet.password)
 end
 
-condition_array = ['Excellent', 'Fair', 'Bad', 'Broken/incomplete']
+# condition_array = ['Excellent', 'Fair', 'Bad', 'Broken/incomplete']
 
-category_array = ['Electronics', 'Books', 'Furniture', 'Toys/games']
+# category_array = ['Electronics', 'Books', 'Furniture', 'Toys/games']
 
-5.times do
-    Post.create(name: Faker::Commerce.product_name, description: Faker::Lorem.sentence, user_id: User.ids.sample, condition: condition_array.sample, category: category_array.sample)
-end
+# 5.times do
+#     Post.create(name: Faker::Commerce.product_name, description: Faker::Lorem.sentence, user_id: User.ids.sample, condition: condition_array.sample, category: category_array.sample)
+# end
 
 puts 'seeds planted! ✅'

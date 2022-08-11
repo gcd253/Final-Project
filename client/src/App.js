@@ -11,6 +11,7 @@ function App() {
 
   const [postData, setPostData] = useState([])
   const [postId, setPostId] = useState('')
+  const [newPostImage, setNewPostImage] = useState('')
 
   useEffect(()=> {
     fetch('/posts')
@@ -32,7 +33,7 @@ function App() {
     })
       .then(res => res.json())
       .then(success => {
-        console.log(success)
+        setNewPostImage(success.image_url)
       })
       .catch(error => console.error(error)
     );
@@ -44,8 +45,8 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<BrowseItems postData={postData} selectCard={handleSelect} />} />
-          <Route path="/messages" element={<MyActivities uploadPost={uploadPost} />} />
+          <Route path="/" element={<BrowseItems postData={postData} selectCard={handleSelect} newPostImage={newPostImage} />} />
+          <Route path="/messages" element={<MyActivities uploadPost={uploadPost} newPostImage={newPostImage} />} />
           <Route path="/new-offer" element={<OfferItem />} />
           { useEffect(() => {
             // console.log(postId)

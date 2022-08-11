@@ -2,9 +2,9 @@ import React from 'react'
 import ItemCard from './ItemCard'
 
 const BrowseItems = ({ postData, selectCard }) => {
-
+  console.log(postData)
   return (
-    <div className="text-gray-600 grid md:grid-cols-3 gap-10" >
+    <div className="text-gray-600 grid md:grid-cols-3 gap-10 p-14" >
       {postData.map(post => <ItemCard 
       key={post.id} 
       id={post.id}
@@ -12,8 +12,8 @@ const BrowseItems = ({ postData, selectCard }) => {
       des={post.description} 
       condition={post.condition}
       category={post.category}
-      poster={post.user.username}
       selectCard={selectCard}
+      imageUrl={post.image}
       />)}
     </div>
   )

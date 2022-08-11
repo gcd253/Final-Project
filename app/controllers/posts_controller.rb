@@ -3,8 +3,11 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
-    render json: @posts #PostandimageSerializer.new(@posts).serializable_hash[:data][:attributes]
+    @posts = Post.all.with_attached_image
+    render json: @posts.map { |post|
+      post.as_json.merge({ image: url_for(post.image) })
+    }.reverse
+    #PostandimageSerializer.new(@posts).serializable_hash[:data][:attributes]
   end
 
   # GET /posts/1
@@ -16,7 +19,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.create!(post_params)
-    render json: @post #PostandimageSerializer.new(@post).serializable_hash[:data][:attributes]
+    render json: PostandimageSerializer.new(@post).serializable_hash[:data][:attributes]
   end
 
   # PATCH/PUT /posts/1

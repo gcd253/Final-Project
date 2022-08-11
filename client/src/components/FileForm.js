@@ -1,6 +1,6 @@
-import { React, useState, useReducer } from 'react'
+import { React, useState } from 'react'
 
-const FileForm = ({ uploadPost }) => {
+const FileForm = ({ uploadPost, newPostImage }) => {
 
     const [postDetails, setPostDetails] = useState({
         name: "",
@@ -82,6 +82,10 @@ const FileForm = ({ uploadPost }) => {
                     Post
                 </button>
             </form>
+            { newPostImage ? 
+                <img src={newPostImage} alt='an image' /> :
+                null
+            }
         </div>
     )
 }
