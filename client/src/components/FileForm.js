@@ -37,10 +37,11 @@ const FileForm = ({ uploadPost, newPostImage }) => {
     }
 
     return (
-        <div className="bg-gray-200">
-            <form onSubmit={e => handleSubmit(e)} >
+        <div className="h-full flex justify-center items-center">
+            <form className="flex w-2/3 flex-col justify-center items-center bg-gray-300 rounded-lg" onSubmit={e => handleSubmit(e)} >
                 <label>Item name:</label>
                 <input
+                    className="block border-none p-1 rounded-lg w-2/3"
                     type="text"
                     name="name"
                     onChange={handlePostDetailsChange}
@@ -48,15 +49,17 @@ const FileForm = ({ uploadPost, newPostImage }) => {
                 />
 
                 <label>Description:</label>
-                <input
-                    type="text"
+                <textarea
+                    className="block border-none p-1 rounded-lg w-2/3 h-24"
                     name="description"
+                    rows={5}
                     onChange={handlePostDetailsChange}
                     value={postDetails.description}
                 />
 
                 <label>Condition:</label>
                 <input
+                    className="block border-none p-1 rounded-lg w-2/3"
                     type="text"
                     name="condition"
                     onChange={handlePostDetailsChange}
@@ -65,6 +68,7 @@ const FileForm = ({ uploadPost, newPostImage }) => {
 
                 <label>Category:</label>
                 <input
+                    className="block border-none p-1 rounded-lg w-2/3"
                     type="text"
                     name="category"
                     onChange={handlePostDetailsChange}
@@ -78,11 +82,11 @@ const FileForm = ({ uploadPost, newPostImage }) => {
                     id="image"
                     placeholder="Image(s)"
                 />
-                <button type="submit" value="Post">
+                <button className="border-none p-1 uppercase rounded-2xl font-bold bg-blue-600 m-4" type="submit" value="Post">
                     Post
                 </button>
             </form>
-            { newPostImage ? 
+            {newPostImage ?
                 <img src={newPostImage} alt='an image' /> :
                 null
             }

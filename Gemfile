@@ -24,6 +24,9 @@ gem 'rack', '~> 2.2', '>= 2.2.4'
 # Byebug
 gem 'byebug', '~> 11.1', '>= 11.1.3'
 
+# Bcrypt
+gem 'bcrypt', '~> 3.1', '>= 3.1.18'
+
 # Action Text and i dont even know what its for :'(
 gem 'actiontext', '~> 7.0', '>= 7.0.3.1'
 

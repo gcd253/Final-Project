@@ -4,6 +4,8 @@ puts '🌱 seeding data...'
 
 # User.create(username: test, email: test@test.com, password: test)
 
+User.create(username: test, email: test@test.com, password: 12345)
+
 15.times do
     User.create(username: Faker::Internet.username, email: Faker::Internet.free_email, password_digest: Faker::Internet.password)
 end
