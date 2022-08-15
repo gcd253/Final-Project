@@ -1,27 +1,27 @@
 import { React, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+function Login({ onLogin }) {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
-    const [loginDetails, setLoginDetails] = useState({
-        username: "",
-        password: ""
-    })
 
     const navigate = useNavigate();
 
-    function handleLoginFormChange(e) {
-        const name = e.target.name
-        const value = e.target.value
-        setLoginDetails({
-            ...loginDetails,
-            [name]: value,
+    function handleSubmit(e) {
+        e.preventDefault();
+        fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
         })
-        console.log(loginDetails)
-    }
-
-    function handleLogin(e) {
-        e.preventDefault()
+            .then((r) => r.json())
+            .then((user) => {
+                if (user.id) { onLogin(user) }
+            }
+            );
     }
 
     function navigateSignup() {
@@ -30,33 +30,31 @@ const Login = () => {
 
     return (
         <div className="bg-gray-200">
-            <form onSubmit={(e) => handleLogin(e)} >
-                <label>Username:</label>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="username">Username:</label>
                 <input
+                    placeholder="Username"
                     type="text"
-                    name="username"
-                    onChange={handleLoginFormChange}
-                    value={loginDetails.username}
+                    id="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
-
-                <label>Password:</label>
+                <label htmlFor="password">Password:</label>
                 <input
-                    type="password"
-                    name="password"
                     autoComplete="on"
-                    onChange={handleLoginFormChange}
-                    value={loginDetails.password}
+                    placeholder="Password"
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
-
-                <button className="duration-200 hover:text-red-500" type="submit" value="Post">
-                    Login
-                </button>
+                <button className="duration-200 hover:text-red-500 hover:scale-[1.02]" type="submit">Submit</button>
             </form>
-            <button className="duration-200 hover:text-red-500 text-xs hover:scale-[1.02] " onClick={navigateSignup} >
+            <button className="duration-200 hover:text-red-500 text-xs hover:scale-[1.02]" onClick={navigateSignup} >
                 Don't have an account? Sign up
             </button>
         </div>
-    )
+    );
 }
 
 export default Login

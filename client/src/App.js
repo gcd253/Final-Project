@@ -4,12 +4,10 @@ import Navbar from './components/Navbar';
 import BrowseItems from './components/BrowseItems';
 import MyActivities from './components/MyActivities';
 import OfferItem from './components/OfferItem';
-import Login from './components/Login';
-import Signup from './components/Signup';
 import ItemDetails from './components/ItemDetails';
 import { useEffect, useState } from 'react'
-import SignUpDC from './components/SignUpDC';
-import LoginDC from './components/LoginDC';
+import Signup from './components/Signup';
+import Login from './components/Login';
 
 function App() {
 
@@ -19,11 +17,12 @@ function App() {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    fetch("/me").then((response) => {
-      if (response.ok) {
-        response.json().then((user) => setUser(user));
-      }
-    });
+    fetch('/me')
+      .then((response) => {
+        if (response.ok) {
+          response.json().then((user) => setUser(user));
+        }
+      });
   }, []);
 
   useEffect(() => {
@@ -58,7 +57,7 @@ function App() {
 
   return (
     <div className="App">
-      {setUser ? (
+      {user ? (
         <div>
           <Navbar onLogout={onLogout} />
           <Routes>
@@ -67,10 +66,10 @@ function App() {
             <Route path="/new-offer" element={<OfferItem />} />
           </Routes>
         </div>) :
-        <Routes>
-          <Route path="/login" element={<LoginDC onLogin={setUser} />} />
-          <Route path="/signup" element={<SignUpDC onLogin={setUser} />} />
-        </Routes>
+          <Routes>
+            <Route path="/login" element={<Login onLogin={setUser} />} />
+            <Route path="/signup" element={<Signup onLogin={setUser} />} />
+          </Routes>
       }
     </div>
   );
