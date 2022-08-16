@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :authorize, only: [:show]
+  skip_before_action :authorize, only: [:index, :show]
 
   # GET /users
   def index
@@ -16,6 +18,7 @@ class UsersController < ApplicationController
   # POST /users
   def create
     user = User.create!(user_params)
+    session[:user_id] = user.id
     render json: user, status: :created
   end
 
@@ -35,6 +38,11 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def authorize
+      return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

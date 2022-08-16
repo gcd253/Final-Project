@@ -1,8 +1,13 @@
 import React from 'react'
+import Navbar from './Navbar'
+import { Outlet } from 'react-router-dom'
 
-const Home = () => {
+const Home = ({ user, onLogout }) => {
   return (
-    <div>Home</div>
+    <div>
+      <Navbar user={user} onLogout={onLogout} />
+      <Outlet />
+    </div>
   )
 }
 

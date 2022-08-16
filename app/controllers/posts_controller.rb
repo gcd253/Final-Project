@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   def show
     post = Post.find(params[:id])
-    render json: post, status: :ok
+    render json: post
   end
 
   # POST /posts
@@ -29,6 +29,14 @@ class PostsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  # My offers
+  def my_offers
+    posts = Post.where(user_id: session[:user_id]).with_attached_image
+    render json: posts.map { |post|
+      post.as_json.merge({ image: url_for(post.image) })
+    }.reverse
   end
 
   # DELETE /posts/1

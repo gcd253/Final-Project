@@ -1,12 +1,25 @@
-import { React, useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import { React, useState, useEffect, useRef, useContext } from 'react'
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from '../hooks/useAuth';
 
 function Login({ onLogin }) {
+
+    const { setAuth } = useAuth();
+
+    const userRef = useRef();
+    const errRef = useRef();
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/"
+
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -22,6 +35,7 @@ function Login({ onLogin }) {
                 if (user.id) { onLogin(user) }
             }
             );
+        navigate("/items")
     }
 
     function navigateSignup() {
@@ -30,14 +44,17 @@ function Login({ onLogin }) {
 
     return (
         <div className="bg-gray-200">
+            <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username:</label>
                 <input
                     placeholder="Username"
                     type="text"
                     id="username"
+                    ref={userRef}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    required
                 />
                 <label htmlFor="password">Password:</label>
                 <input
@@ -47,6 +64,7 @@ function Login({ onLogin }) {
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                 />
                 <button className="duration-200 hover:text-red-500 hover:scale-[1.02]" type="submit">Submit</button>
             </form>

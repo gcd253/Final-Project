@@ -11,6 +11,7 @@ import Login from './components/Login';
 import FileForm from './components/FileForm';
 import Messages from './components/Messages';
 import Home from './components/Home';
+import RequireAuth from './components/RequireAuth';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
   const [newPostImage, setNewPostImage] = useState('')
   const [user, setUser] = useState({ "username": "", "email": "" })
   const [selectedCard, setSelectedCard] = useState('')
+  const [userPostData, setUserPostData] = useState([])
 
   const navigate = useNavigate();
 
@@ -63,20 +65,28 @@ function App() {
     navigate(`/items/${id}`)
   }
 
+  function userPosts() {
+    fetch('/user-offers')
+    .then(res => res.json())
+    .then(res => setUserPostData(res))
+  }
+
   return (
     <div className="App">
       <div>
-        <Navbar user={user} onLogout={onLogout} />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/items" element={<BrowseItems postData={postData} newPostImage={newPostImage} selectCard={handleSelect} />}>
-            <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} />} />
+
+          <Route path="/" element={<Home user={user} onLogout={onLogout} />}>
+            <Route path="/items" element={<BrowseItems postData={postData} newPostImage={newPostImage} selectCard={handleSelect} />}>
+              <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} />} />
+            </Route>
+            <Route path="/activities" element={<MyActivities userPosts={userPosts} uploadPost={uploadPost} newPostImage={newPostImage} />}>
+              <Route path="my-offers" element={<OfferItem data={userPostData} />} />
+              <Route path="new-offer" element={<FileForm user={user} uploadPost={uploadPost} />} />
+              <Route path="my-messages" element={<Messages />} />
+            </Route>
           </Route>
-          <Route path="/activities" element={<MyActivities uploadPost={uploadPost} newPostImage={newPostImage} />}>
-            <Route path="my-offers" element={<OfferItem />} />
-            <Route path="new-offer" element={<FileForm user={user} uploadPost={uploadPost} />} />
-            <Route path="my-messages" element={<Messages />} />
-          </Route>
+
           <Route path="/login" element={<Login onLogin={setUser} />} />
           <Route path="/signup" element={<Signup onLogin={setUser} />} />
           <Route
