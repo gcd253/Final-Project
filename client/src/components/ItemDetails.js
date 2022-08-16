@@ -11,7 +11,7 @@ const ItemDetails = ({ selectedCard }) => {
           <p>Category: {selectedCard.category}</p>
           <p>Condition: {selectedCard.condition} </p>
           <button>
-            Message user {selectedCard.user.username}
+            {/* Message user {selectedCard.user.username} */}
           </button>
         </div>
       </div>

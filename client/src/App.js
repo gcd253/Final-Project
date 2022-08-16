@@ -81,7 +81,7 @@ function App() {
               <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} />} />
             </Route>
             <Route path="/activities" element={<MyActivities userPosts={userPosts} uploadPost={uploadPost} newPostImage={newPostImage} />}>
-              <Route path="my-offers" element={<OfferItem data={userPostData} />} />
+              <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} />} />
               <Route path="new-offer" element={<FileForm user={user} uploadPost={uploadPost} />} />
               <Route path="my-messages" element={<Messages />} />
             </Route>
