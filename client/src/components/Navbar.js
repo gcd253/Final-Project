@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Navbar = ({ onLogout }) => {
+const Navbar = ({ onLogout, user }) => {
 
   function handleLogout() {
     fetch("/logout", {
@@ -15,13 +15,13 @@ const Navbar = ({ onLogout }) => {
   return (
     <div className="bg-gray-200 p-6 flex flex-row" >
       <div className="duration-200 hover:text-red-500 mx-8">
-        <Link to="/">Browse</Link>
+        <div>Welcome, {user.username}</div>
       </div>
       <div className="duration-200 hover:text-red-500 mx-8">
-        <Link to="/messages">Messages</Link>
+        <Link to="/items">Browse</Link>
       </div>
       <div className="duration-200 hover:text-red-500 mx-8">
-        <Link to="/new-offer">Post an offer</Link>
+        <Link to="/activities">My Account</Link>
       </div>
       <div className="duration-200 hover:text-red-500 mx-8">
         <button onClick={handleLogout} >

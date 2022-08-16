@@ -39,6 +39,7 @@ function Signup({ onLogin, setUser }) {
                 response.json().then((user) => setUser(user));
             }
         });
+        navigate('/')
     }
 
     return (

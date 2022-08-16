@@ -2,7 +2,7 @@ import React from 'react'
 
 const OfferItem = () => {
   return (
-    <div>OfferItem</div>
+    <div>My Offers</div>
   )
 }
 

@@ -1,6 +1,6 @@
 import { React, useState } from 'react'
 
-const FileForm = ({ uploadPost, newPostImage }) => {
+const FileForm = ({ uploadPost, newPostImage, user }) => {
 
     const [postDetails, setPostDetails] = useState({
         name: "",
@@ -30,7 +30,7 @@ const FileForm = ({ uploadPost, newPostImage }) => {
         data.append('description', postDetails.description)
         data.append('condition', postDetails.condition);
         data.append('category', postDetails.category)
-        data.append('user_id', 1)
+        data.append('user_id', user.id)
 
         data.append('image', e.target.image.files[0]);
         uploadPost(data);

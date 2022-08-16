@@ -8,13 +8,18 @@ import ItemDetails from './components/ItemDetails';
 import { useEffect, useState } from 'react'
 import Signup from './components/Signup';
 import Login from './components/Login';
+import FileForm from './components/FileForm';
+import Messages from './components/Messages';
+import Home from './components/Home';
 
 function App() {
 
   const [postData, setPostData] = useState([])
-  const [postId, setPostId] = useState('')
   const [newPostImage, setNewPostImage] = useState('')
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState({ "username": "", "email": "" })
+  const [selectedCard, setSelectedCard] = useState('')
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('/me')
@@ -31,12 +36,6 @@ function App() {
       .then(itemData => setPostData(itemData))
   }, [])
 
-  function handleSelect(id) {
-    fetch(`/posts/${id}`)
-      .then(res => res.json())
-      .then(selectedCard => setPostId(selectedCard.id))
-  }
-
   function uploadPost(data) {
 
     fetch('/posts', {
@@ -52,25 +51,44 @@ function App() {
   }
 
   function onLogout() {
-    setUser(null)
+    setUser({ "username": "", "email": "" })
+    navigate('/login')
+    console.log(user)
+  }
+
+  function handleSelect(id) {
+    fetch(`/posts/${id}`)
+      .then(res => res.json())
+      .then(selectedCard => setSelectedCard(selectedCard))
+    navigate(`/items/${id}`)
   }
 
   return (
     <div className="App">
-      {user ? (
-        <div>
-          <Navbar onLogout={onLogout} />
-          <Routes>
-            <Route path="/" element={<BrowseItems postData={postData} selectCard={handleSelect} newPostImage={newPostImage} />} />
-            <Route path="/messages" element={<MyActivities uploadPost={uploadPost} newPostImage={newPostImage} />} />
-            <Route path="/new-offer" element={<OfferItem />} />
-          </Routes>
-        </div>) :
-          <Routes>
-            <Route path="/login" element={<Login onLogin={setUser} />} />
-            <Route path="/signup" element={<Signup onLogin={setUser} />} />
-          </Routes>
-      }
+      <div>
+        <Navbar user={user} onLogout={onLogout} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/items" element={<BrowseItems postData={postData} newPostImage={newPostImage} selectCard={handleSelect} />}>
+            <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} />} />
+          </Route>
+          <Route path="/activities" element={<MyActivities uploadPost={uploadPost} newPostImage={newPostImage} />}>
+            <Route path="my-offers" element={<OfferItem />} />
+            <Route path="new-offer" element={<FileForm user={user} uploadPost={uploadPost} />} />
+            <Route path="my-messages" element={<Messages />} />
+          </Route>
+          <Route path="/login" element={<Login onLogin={setUser} />} />
+          <Route path="/signup" element={<Signup onLogin={setUser} />} />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>There's nothing here!</p>
+              </main>
+            }
+          />
+        </Routes>
+      </div>
     </div>
   );
 }
