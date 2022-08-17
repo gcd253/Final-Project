@@ -21,6 +21,7 @@ function App() {
   const [user, setUser] = useState({ "username": "", "email": "" })
   const [selectedCard, setSelectedCard] = useState('')
   const [userPostData, setUserPostData] = useState([])
+  const [darkMode, setDarkMode] = useState(false)
 
   const [editDetails, setEditDetails] = useState({
     name: "",
@@ -100,7 +101,7 @@ function App() {
       <div>
         <Routes>
 
-          <Route path="/" element={<Home user={user} onLogout={onLogout} />}>
+          <Route path="/" element={<Home user={user} onLogout={onLogout} darkMode={darkMode} setDarkMode={setDarkMode} />}>
             <Route path="/items" element={<BrowseItems postData={postData} newPostImage={newPostImage} selectCard={handleSelect} />}>
               <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} />} />
             </Route>
