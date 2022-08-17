@@ -1,6 +1,6 @@
 import { React, useState } from 'react'
 
-const EditPost = ({ editDetails, setEditDetails }) => {
+const EditPost = ({ editDetails, setEditDetails, updatePost }) => {
 
     function handlePostDetailsChange(e) {
         const name = e.target.name
@@ -12,9 +12,14 @@ const EditPost = ({ editDetails, setEditDetails }) => {
         console.log(editDetails)
     }
 
+    function handleSubmit(e) {
+        e.preventDefault()
+        updatePost(editDetails)
+    }
+
     return (
         <div className="h-full flex justify-center items-center">
-            <form className="flex w-2/3 flex-col justify-center items-center bg-gray-300 rounded-lg" >
+            <form className="flex w-2/3 flex-col justify-center items-center bg-gray-300 rounded-lg" onSubmit={e => handleSubmit(e)} >
                 <label>Item name:</label>
                 <input
                     className="block border-none p-1 rounded-lg w-2/3"

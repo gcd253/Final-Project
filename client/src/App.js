@@ -21,7 +21,6 @@ function App() {
   const [user, setUser] = useState({ "username": "", "email": "" })
   const [selectedCard, setSelectedCard] = useState('')
   const [userPostData, setUserPostData] = useState([])
-  const [editCard, setEditCard] = useState('')
 
   const [editDetails, setEditDetails] = useState({
     name: "",
@@ -92,6 +91,10 @@ function App() {
     navigate(`/activities/my-offers/${post_id}`)
   }
 
+  function updatePost(data) {
+    console.log(data)
+  }
+
   return (
     <div className="App">
       <div>
@@ -103,7 +106,7 @@ function App() {
             </Route>
             <Route path="/activities" element={<MyActivities userPosts={userPosts} uploadPost={uploadPost} newPostImage={newPostImage} />}>
               <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} editPost={editPost} />}>
-                <Route path=":id" element={<EditPost editCard={editCard} setEditCard={setEditCard} editDetails={editDetails} setEditDetails={setEditDetails} />} />
+                <Route path=":id" element={<EditPost editDetails={editDetails} setEditDetails={setEditDetails} updatePost={updatePost} />} />
               </Route>
               <Route path="new-offer" element={<FileForm user={user} uploadPost={uploadPost} />} />
               <Route path="my-messages" element={<Messages />} />
