@@ -20,7 +20,7 @@ const OfferItem = ({ data, userPosts, editPost }) => {
             editPost={editPost}
           />)}
         </div> :
-          <h1>You don't have any posts yet!</h1>}
+          <h1 className="my-12" >You don't have any posts yet!</h1>}
       </div>
     </div>
   )

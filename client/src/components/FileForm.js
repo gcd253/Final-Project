@@ -38,7 +38,7 @@ const FileForm = ({ uploadPost, newPostImage, user }) => {
 
     return (
         <div className="h-full flex justify-center items-center">
-            <form className="shadow-xl flex w-2/3 flex-col justify-center items-center bg-gray-300 rounded-2xl border-red-400 border-b-4 border-t-4 mb-12" onSubmit={e => handleSubmit(e)} >
+            <form className="shadow-xl flex w-2/3 flex-col justify-center items-center bg-gray-300 rounded-2xl border-red-400 border-b-4 border-t-4 my-12" onSubmit={e => handleSubmit(e)} >
                 <label className="font-medium mt-2 mb-1" >Item name:</label>
                 <input
                     className="block border-none p-2 pl-4 rounded-lg w-2/3"
