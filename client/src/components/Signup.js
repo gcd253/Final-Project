@@ -43,10 +43,12 @@ function Signup({ onLogin, setUser }) {
     }
 
     return (
-        <div className="bg-gray-200">
-            <form onSubmit={handleSubmit}>
+        <div className="h-full flex flex-col justify-center items-center">
+            <h1>Sign up</h1>
+            <form onSubmit={handleSubmit} className="flex w-2/3 flex-col justify-center items-center bg-gray-300 rounded-2xl border-red-400 border-b-4 border-t-4" >
                 <label htmlFor="username">Username:</label>
                 <input
+                    className="block border-none p-1 rounded-lg w-2/3"
                     placeholder="Username"
                     type="text"
                     id="username"
@@ -55,6 +57,7 @@ function Signup({ onLogin, setUser }) {
                 />
                 <label htmlFor="email">Email:</label>
                 <input
+                    className="block border-none p-1 rounded-lg w-2/3"
                     placeholder="Email"
                     type="text"
                     id="email"
@@ -63,6 +66,7 @@ function Signup({ onLogin, setUser }) {
                 />
                 <label htmlFor="password">Password:</label>
                 <input
+                    className="block border-none p-1 rounded-lg w-2/3"
                     placeholder="Password"
                     autoComplete="on"
                     type="password"
@@ -72,6 +76,7 @@ function Signup({ onLogin, setUser }) {
                 />
                 <label htmlFor="password_confirmation">Confirm Password:</label>
                 <input
+                    className="block border-none p-1 rounded-lg w-2/3"
                     placeholder="Confirm password"
                     autoComplete="on"
                     type="password"
@@ -79,11 +84,15 @@ function Signup({ onLogin, setUser }) {
                     value={passwordConfirmation}
                     onChange={(e) => setPasswordConfirmation(e.target.value)}
                 />
-                <button className="duration-200 hover:text-red-500" type="submit" value="Post">Sign up</button>
+                <button className="duration-200 hover:text-red-500 m-4 bg-gray-100 pl-6 pr-6 pt-2 pb-2 rounded-full hover:bg-gray-200 hover:scale-[1.02]" type="submit" value="Post">Sign up</button>
+                <p className="text-xs italic font-semibold mb-2" >Already have an account?
+                    <button className="italic font-semibold duration-200 hover:text-red-500 text-xs hover:scale-[1.02] ml-1" onClick={navigateLogin} >
+                        Login
+                    </button>
+                </p>
             </form>
-            <button className="duration-200 hover:text-red-500 text-xs hover:scale-[1.02]" onClick={navigateLogin} >
-                Already have an account? Log in
-            </button>
+
+
         </div>
     );
 }
