@@ -25,25 +25,25 @@ const Navbar = ({ onLogout, user, setDarkMode, darkMode }) => {
   }
 
   return (
-    <div className="bg-gray-200 p-6 flex flex-row relative" >
-      <div className="cursor-pointer duration-200 hover:text-red-500 ">
+    <div className="bg-gray-200 p-6 flex flex-row relative dark:bg-slate-700" >
+      <div className="cursor-pointer duration-200 hover:text-red-500 dark:hover:text-slate-300">
         <div>{homeIcon}</div>
       </div>
       <div className="mx-8">
         <div>Welcome, {user.username}</div>
       </div>
-      <div className="duration-200 hover:text-red-500 mx-8 font-medium">
+      <div className="duration-200 hover:text-red-500 mx-8 font-medium dark:hover:text-slate-300">
         <Link to="/items">Browse</Link>
       </div>
-      <div className="duration-200 hover:text-red-500 mx-8 font-medium">
+      <div className="duration-200 hover:text-red-500 mx-8 font-medium dark:hover:text-slate-300">
         <Link to="/activities">My Account</Link>
       </div>
-      <div className="duration-200 hover:text-red-500 mx-8 font-medium">
+      <div className="duration-200 hover:text-red-500 mx-8 font-medium dark:hover:text-slate-300">
         <button onClick={handleLogout} >
           Log out
         </button>
       </div>
-      <div className="cursor-pointer duration-200 hover:text-red-500 absolute right-8">
+      <div className="cursor-pointer duration-200 hover:text-red-500 absolute right-8 dark:hover:text-slate-300">
         <button onClick={() => setDarkMode(!darkMode)} >
           { darkMode ? moonIcon : sunIcon}
         </button>

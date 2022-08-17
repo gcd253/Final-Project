@@ -97,8 +97,8 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div>
+    <div className={ darkMode ? "App dark" : "App"}>
+      <div className="h-full dark:bg-slate-900" >
         <Routes>
 
           <Route path="/" element={<Home user={user} onLogout={onLogout} darkMode={darkMode} setDarkMode={setDarkMode} />}>

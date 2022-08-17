@@ -26,11 +26,11 @@ const UserPosts = ({ name, des, condition, category, id, imageUrl, userPosts, ed
 
     return (
         <div>
-            <div className="bg-gray-100 rounded overflow-hidden shadow-md cursor-pointer duration-500 hover:bg-gray-200 relative pb-12">
+            <div className="bg-gray-100 rounded overflow-hidden shadow-md cursor-pointer duration-500 hover:bg-gray-200 relative pb-12 dark:bg-slate-800 dark:hover:scale-[1.01]">
                 <img src={imageUrl} alt="an image of the item" ></img>
-                <h2 className="text-gray-800 font-bold">{name}</h2>
-                <h3>{des}</h3>
-                <div className="rounded-full text-xs text-gray-100 pt-1 pb-1 ml-6 mb-2 bottom-0 left-0 bg-gray-400 w-1/3 absolute duration-300 hover:scale-[1.02] hover:bg-gray-500" >
+                <h2 className="text-gray-800 font-bold dark:text-white">{name}</h2>
+                <h3 className="dark:text-slate-400" >{des}</h3>
+                <div className="rounded-full text-xs text-gray-100 pt-1 pb-1 ml-6 mb-2 bottom-0 left-0 bg-gray-400 w-1/3 absolute duration-300 hover:scale-[1.02] hover:bg-gray-500 dark:bg-slate-500 dark:hover:bg-slate-400 dark:text-slate-200 dark:hover:text-slate-900 dark:shadow-xl" >
                     <button onClick={() => editPost(id)} >{pencilIcon}</button>
                 </div>
                 <div className="rounded-full text-xs text-gray-100 pt-1 pb-1 mr-6 mb-2 bottom-0 right-0 bg-red-400 w-1/3 absolute duration-300 hover:scale-[1.02] hover:bg-red-500" >
