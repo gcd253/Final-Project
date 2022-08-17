@@ -23,6 +23,13 @@ function App() {
   const [userPostData, setUserPostData] = useState([])
   const [editCard, setEditCard] = useState('')
 
+  const [editDetails, setEditDetails] = useState({
+    name: "",
+    description: "",
+    condition: "",
+    category: ""
+  })
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -76,7 +83,12 @@ function App() {
   function editPost(post_id) {
     fetch(`/posts/${post_id}`)
       .then(res => res.json())
-      .then(card => setEditCard(card))
+      .then(card => setEditDetails({
+        name: card.name,
+        description: card.description,
+        condition: card.condition,
+        category: card.category
+      }))
     navigate(`/activities/my-offers/${post_id}`)
   }
 
@@ -91,7 +103,7 @@ function App() {
             </Route>
             <Route path="/activities" element={<MyActivities userPosts={userPosts} uploadPost={uploadPost} newPostImage={newPostImage} />}>
               <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} editPost={editPost} />}>
-                <Route path=":id" element={<EditPost editCard={editCard} setEditCard={setEditCard} />} />
+                <Route path=":id" element={<EditPost editCard={editCard} setEditCard={setEditCard} editDetails={editDetails} setEditDetails={setEditDetails} />} />
               </Route>
               <Route path="new-offer" element={<FileForm user={user} uploadPost={uploadPost} />} />
               <Route path="my-messages" element={<Messages />} />

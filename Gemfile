@@ -33,6 +33,9 @@ gem 'actiontext', '~> 7.0', '>= 7.0.3.1'
 # Image processing
 gem 'image_processing', '~> 1.12', '>= 1.12.1'
 
+# AWS S3 gem
+gem "aws-sdk-s3", require: false
+
 # CORS gem
 gem 'rack-cors', '~> 1.1', '>= 1.1.1'
 
