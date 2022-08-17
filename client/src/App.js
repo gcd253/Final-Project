@@ -12,6 +12,7 @@ import FileForm from './components/FileForm';
 import Messages from './components/Messages';
 import Home from './components/Home';
 import RequireAuth from './components/RequireAuth';
+import EditPost from './components/EditPost';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
   const [user, setUser] = useState({ "username": "", "email": "" })
   const [selectedCard, setSelectedCard] = useState('')
   const [userPostData, setUserPostData] = useState([])
+  const [editCard, setEditCard] = useState('')
 
   const navigate = useNavigate();
 
@@ -67,8 +69,15 @@ function App() {
 
   function userPosts() {
     fetch('/user-offers')
-    .then(res => res.json())
-    .then(res => setUserPostData(res))
+      .then(res => res.json())
+      .then(res => setUserPostData(res))
+  }
+
+  function editPost(post_id) {
+    fetch(`/posts/${post_id}`)
+      .then(res => res.json())
+      .then(card => setEditCard(card))
+    navigate(`/activities/my-offers/${post_id}`)
   }
 
   return (
@@ -81,7 +90,9 @@ function App() {
               <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} />} />
             </Route>
             <Route path="/activities" element={<MyActivities userPosts={userPosts} uploadPost={uploadPost} newPostImage={newPostImage} />}>
-              <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} />} />
+              <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} editPost={editPost} />}>
+                <Route path=":id" element={<EditPost editCard={editCard} setEditCard={setEditCard} />} />
+              </Route>
               <Route path="new-offer" element={<FileForm user={user} uploadPost={uploadPost} />} />
               <Route path="my-messages" element={<Messages />} />
             </Route>
