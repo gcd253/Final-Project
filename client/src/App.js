@@ -1,6 +1,5 @@
 import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import Navbar from './components/Navbar';
 import BrowseItems from './components/BrowseItems';
 import MyActivities from './components/MyActivities';
 import OfferItem from './components/OfferItem';
@@ -11,7 +10,6 @@ import Login from './components/Login';
 import FileForm from './components/FileForm';
 import Messages from './components/Messages';
 import Home from './components/Home';
-import RequireAuth from './components/RequireAuth';
 import EditPost from './components/EditPost';
 
 function App() {
@@ -36,10 +34,12 @@ function App() {
     fetch('/me')
       .then((response) => {
         if (response.ok) {
-          response.json().then((user) => setUser(user));
+          response.json().then((userData) => setUser(userData));
         }
       });
   }, []);
+
+  console.log(user)
 
   useEffect(() => {
     fetch('/posts')

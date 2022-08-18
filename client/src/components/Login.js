@@ -1,25 +1,14 @@
-import { React, useState, useEffect, useRef, useContext } from 'react'
+import { React, useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from '../hooks/useAuth';
 
 function Login({ onLogin }) {
-
-    const { setAuth } = useAuth();
-
-    const userRef = useRef();
-    const errRef = useRef();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
 
     const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/"
-
-    useEffect(() => {
-        userRef.current.focus();
-    }, [])
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -32,10 +21,13 @@ function Login({ onLogin }) {
         })
             .then((r) => r.json())
             .then((user) => {
-                if (user.id) { onLogin(user) }
+                if (user.id) {
+                    onLogin(user)
+                    navigate("/items")
+                }
             }
             );
-        navigate("/items")
+
     }
 
     function navigateSignup() {
@@ -52,7 +44,6 @@ function Login({ onLogin }) {
                     placeholder="Username"
                     type="text"
                     id="username"
-                    ref={userRef}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
