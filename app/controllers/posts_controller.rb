@@ -6,14 +6,15 @@ class PostsController < ApplicationController
     @posts = Post.all.with_attached_image
     render json: @posts.map { |post|
       post.as_json.merge({ image: url_for(post.image) })
-    }.reverse
+    }.reverse, status: :ok
     #PostandimageSerializer.new(@posts).serializable_hash[:data][:attributes]
   end
 
   # GET /posts/1
   def show
     post = Post.find(params[:id])
-    render json: post
+    user = post.user.username
+    render json: PostandimageSerializer.new(@post).serializable_hash[:data][:attributes], include: :user
   end
 
   # POST /posts

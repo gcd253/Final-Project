@@ -20,6 +20,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState('')
   const [userPostData, setUserPostData] = useState([])
   const [darkMode, setDarkMode] = useState(false)
+  const [deleted, setDeleted] = useState([])
 
   const [editDetails, setEditDetails] = useState({
     name: "",
@@ -39,13 +40,11 @@ function App() {
       });
   }, []);
 
-  console.log(user)
-
   useEffect(() => {
     fetch('/posts')
       .then(res => res.json())
       .then(itemData => setPostData(itemData))
-  }, [])
+  }, [deleted, newPostImage])
 
   function uploadPost(data) {
 
@@ -59,6 +58,7 @@ function App() {
       })
       .catch(error => console.error(error)
       );
+    navigate('/items')
   }
 
   function onLogout() {
@@ -70,8 +70,8 @@ function App() {
   function handleSelect(id) {
     fetch(`/posts/${id}`)
       .then(res => res.json())
-      .then(selectedCard => setSelectedCard(selectedCard))
-    navigate(`/items/${id}`)
+      .then(card => setSelectedCard(card))
+    // navigate(`/items/${id}`)
   }
 
   function userPosts() {
@@ -96,8 +96,20 @@ function App() {
     console.log(data)
   }
 
+  function deletePost(postId) {
+    fetch(`/posts/${postId}`, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(res => setDeleted(res))
+  }
+
+  useEffect(() => {
+    userPosts()
+}, [deleted])
+
   return (
-    <div className={ darkMode ? "App dark" : "App"}>
+    <div className={darkMode ? "App dark" : "App"}>
       <div className="h-full dark:bg-slate-900" >
         <Routes>
 
@@ -106,7 +118,7 @@ function App() {
               <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} />} />
             </Route>
             <Route path="/activities" element={<MyActivities userPosts={userPosts} uploadPost={uploadPost} newPostImage={newPostImage} />}>
-              <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} editPost={editPost} />}>
+              <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} editPost={editPost} deletePost={deletePost} />}>
                 <Route path=":id" element={<EditPost editDetails={editDetails} setEditDetails={setEditDetails} updatePost={updatePost} />} />
               </Route>
               <Route path="new-offer" element={<FileForm user={user} uploadPost={uploadPost} />} />
@@ -119,8 +131,8 @@ function App() {
           <Route
             path="*"
             element={
-              <main style={{ padding: "1rem" }}>
-                <p>There's nothing here!</p>
+              <main className="h-screen dark:bg-slate-900">
+                <p className="p-24 dark:text-slate-400 font-medium">Uh oh! Looks like there's nothing here...</p>
               </main>
             }
           />

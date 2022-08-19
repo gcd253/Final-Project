@@ -2,7 +2,7 @@ import React from 'react'
 import UserPosts from './UserPosts'
 import { Outlet } from 'react-router-dom'
 
-const OfferItem = ({ data, userPosts, editPost }) => {
+const OfferItem = ({ data, userPosts, editPost, deletePost }) => {
   return (
     <div>
       <Outlet />
@@ -18,6 +18,7 @@ const OfferItem = ({ data, userPosts, editPost }) => {
             imageUrl={item.image}
             userPosts={userPosts}
             editPost={editPost}
+            deletePost={deletePost}
           />)}
         </div> :
           <h1 className="my-12 dark:text-slate-400" >You don't have any posts yet!</h1>}
