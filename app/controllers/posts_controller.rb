@@ -25,11 +25,8 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1
   def update
-    if @post.update(post_params)
-      redirect_to @post, notice: "Post was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    @post.update!(post_params)
+    redirect_to @post, notice: "Post was successfully updated."
   end
 
   # My offers
@@ -54,7 +51,7 @@ private
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.permit(:name, :description, :user_id, :condition, :category, :image)
+      params.permit(:name, :description, :user_id, :condition, :category, :image, :id)
     end
   
 end

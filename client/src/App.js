@@ -21,6 +21,7 @@ function App() {
   const [userPostData, setUserPostData] = useState([])
   const [darkMode, setDarkMode] = useState(false)
   const [deleted, setDeleted] = useState([])
+  const [editId, setEditId] = useState(0)
 
   const [editDetails, setEditDetails] = useState({
     name: "",
@@ -81,6 +82,7 @@ function App() {
   }
 
   function editPost(post_id) {
+    setEditId(post_id)
     fetch(`/posts/${post_id}`)
       .then(res => res.json())
       .then(card => setEditDetails({
@@ -92,8 +94,14 @@ function App() {
     navigate(`/activities/my-offers/${post_id}`)
   }
 
-  function updatePost(data) {
-    console.log(data)
+  function updatePost(data, id) {
+    fetch(`/posts/${id}`,{
+      method: "PATCH",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(res => console.log(res))
   }
 
   function deletePost(postId) {
@@ -119,7 +127,7 @@ function App() {
             </Route>
             <Route path="/activities" element={<MyActivities userPosts={userPosts} uploadPost={uploadPost} newPostImage={newPostImage} />}>
               <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} editPost={editPost} deletePost={deletePost} />}>
-                <Route path=":id" element={<EditPost editDetails={editDetails} setEditDetails={setEditDetails} updatePost={updatePost} />} />
+                <Route path=":id" element={<EditPost editId={editId} editDetails={editDetails} setEditDetails={setEditDetails} updatePost={updatePost} />} />
               </Route>
               <Route path="new-offer" element={<FileForm user={user} uploadPost={uploadPost} />} />
               <Route path="my-messages" element={<Messages />} />

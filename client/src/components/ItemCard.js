@@ -7,7 +7,7 @@ const ItemCard = ({ name, des, condition, category, id, selectCard, imageUrl }) 
 
     <div onClick={() => selectCard(id)} >
       <Link to={`/items/${id}`}>
-        <div className="bg-gray-100 rounded overflow-hidden shadow-md cursor-pointer duration-500 hover:bg-gray-300 hover:scale-[1.03] relative dark:bg-slate-800">
+        <div className="bg-gray-100 rounded overflow-hidden shadow-md cursor-pointer duration-500 hover:bg-gray-300 hover:scale-[1.02] relative dark:bg-slate-800">
           <img src={imageUrl} alt="an image of the item" ></img>
           <h2 className="text-gray-800 font-bold dark:text-white">{name}</h2>
           <h3 className="dark:text-slate-400 pb-1" >{des}</h3>
