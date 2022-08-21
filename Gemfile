@@ -36,6 +36,9 @@ gem 'image_processing', '~> 1.12', '>= 1.12.1'
 # AWS S3 gem
 gem "aws-sdk-s3", require: false
 
+# Redis
+gem 'redis', '~> 4.7', '>= 4.7.1'
+
 # CORS gem
 gem 'rack-cors', '~> 1.1', '>= 1.1.1'
 
@@ -60,3 +63,5 @@ end
 
 
 gem "jsonapi-serializer", "~> 2.2"
+
+gem "turbo-rails", "~> 1.1"

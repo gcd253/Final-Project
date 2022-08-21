@@ -45,7 +45,7 @@ const Navbar = ({ onLogout, user, setDarkMode, darkMode }) => {
       </div>
       <div className="cursor-pointer duration-200 hover:text-red-500 absolute right-8 dark:text-slate-400 dark:hover:text-slate-200">
         <button onClick={() => setDarkMode(!darkMode)} >
-          { darkMode ? moonIcon : sunIcon}
+          { darkMode ? sunIcon : moonIcon}
         </button>
       </div>
     </div>
