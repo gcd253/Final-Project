@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react'
 import Signup from './components/Signup';
 import Login from './components/Login';
 import FileForm from './components/FileForm';
-import Messages from './components/Messages';
 import Home from './components/Home';
 import EditPost from './components/EditPost';
 
@@ -123,14 +122,14 @@ function App() {
 
           <Route path="/" element={<Home user={user} onLogout={onLogout} darkMode={darkMode} setDarkMode={setDarkMode} />}>
             <Route path="/items" element={<BrowseItems postData={postData} newPostImage={newPostImage} selectCard={handleSelect} />}>
-              <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} />} />
+              <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} user={user}/>} />
             </Route>
             <Route path="/activities" element={<MyActivities userPosts={userPosts} uploadPost={uploadPost} newPostImage={newPostImage} />}>
               <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} editPost={editPost} deletePost={deletePost} />}>
                 <Route path=":id" element={<EditPost editId={editId} editDetails={editDetails} setEditDetails={setEditDetails} updatePost={updatePost} />} />
               </Route>
               <Route path="new-offer" element={<FileForm user={user} uploadPost={uploadPost} />} />
-              <Route path="my-messages" element={<Messages />} />
+
             </Route>
           </Route>
 

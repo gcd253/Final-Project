@@ -1,8 +1,13 @@
-import React from 'react'
+import { React, useState } from 'react'
+import SendEmail from './SendEmail'
 
-const ItemDetails = ({ selectedCard, setSelectedCard }) => {
+const ItemDetails = ({ selectedCard, setSelectedCard, user }) => {
+
+  const [emailFormActive, setEmailFormActive] = useState(false)
+
   return (
     selectedCard ?
+    <div>
       <div className="flex justify-center" >
         <div className="bg-gray-100 rounded grid grid-cols-2 overflow-hidden shadow-md duration-500 hover:bg-gray-300 hover:scale-[1.01] w-2/3 mt-12 relative">
           <img src={selectedCard.image_url} alt={`User-uploaded image of ${selectedCard.name}`} />
@@ -15,13 +20,15 @@ const ItemDetails = ({ selectedCard, setSelectedCard }) => {
             <p className="text-xs" >Category: {selectedCard.category}</p>
             <p className="text-xs" >Condition: {selectedCard.condition} </p>
             <p>Message user
-              <button className="duration-200 hover:text-red-500 ml-1" >
+              <button onClick={() => setEmailFormActive(!emailFormActive)} className="duration-200 hover:text-red-500 ml-1" >
                 {selectedCard.image.record.user.username}
               </button>
             </p>
-
           </span>
         </div>
+        
+      </div>
+      {emailFormActive ? <SendEmail user={user.username} email={user.email} selectedEmail={selectedCard.image.record.user.email} /> : null }
       </div>
       : null
   )
