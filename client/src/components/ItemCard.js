@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 const ItemCard = ({ name, des, condition, category, id, selectCard, imageUrl }) => {
 
+
   return (
 
     <div onClick={() => selectCard(id)} >

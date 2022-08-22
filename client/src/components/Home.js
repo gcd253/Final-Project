@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 const Home = ({ user, onLogout, setDarkMode, darkMode }) => {
   return (
-    <div>
+    <div className="h-full ">
       <Navbar user={user} onLogout={onLogout} darkMode={darkMode} setDarkMode={setDarkMode} />
       <Outlet />
     </div>

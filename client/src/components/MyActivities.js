@@ -15,7 +15,6 @@ const MyActivities = ({ uploadPost, newPostImage, userPosts }) => {
       </div>
 
       <Outlet />
-
     </div>
   )
 }

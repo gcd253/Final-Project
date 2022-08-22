@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 const OfferItem = ({ data, userPosts, editPost, deletePost }) => {
   return (
-    <div>
+    <div className="h-screen ">
       <Outlet />
       <div>
         {data.length > 0 ? <div className="text-gray-600 grid md:grid-cols-3 gap-10 p-14" >
