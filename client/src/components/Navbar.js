@@ -27,7 +27,7 @@ const Navbar = ({ onLogout, user, setDarkMode, darkMode }) => {
   return (
     <div className="bg-gray-200 p-6 flex flex-row relative dark:bg-slate-700" >
       <div className="cursor-pointer duration-200 hover:text-red-500 dark:text-slate-400 dark:hover:text-slate-200">
-        <div>{homeIcon}</div>
+        <NavLink to="/home">{homeIcon}</NavLink>
       </div>
       <div className="mx-8">
         <div className="dark:text-slate-400" >Welcome, {user.username}</div>

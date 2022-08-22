@@ -20,10 +20,9 @@ const ItemDetails = ({ selectedCard, setSelectedCard, user }) => {
             <p className="text-xs dark:text-slate-400" >Category: {selectedCard.category}</p>
             <p className="text-xs dark:text-slate-400" >Condition: {selectedCard.condition} </p>
 
-            <button onClick={() => setEmailFormActive(!emailFormActive)} className="duration-500 hover:text-gray-100 m-4 bg-gray-100 pl-4 pr-4 pt-2 pb-2 rounded-full hover:bg-red-400 dark:bg-slate-500 dark:hover:bg-slate-100 dark:text-slate-400 dark:shadow-xl absolute bottom-0 right-0" >
+            <button onClick={() => setEmailFormActive(!emailFormActive)} className="duration-500 hover:text-gray-100 m-4 bg-white pl-4 pr-4 pt-2 pb-2 rounded-full hover:bg-red-400 dark:bg-slate-500 dark:hover:bg-slate-300 dark:text-slate-400 dark:shadow-xl absolute bottom-0 right-0" >
               <div className="flex flex-row">
-                <p>Message</p>
-                <p className="duration-500 hover:text-red-500 ml-1 dark:text-slate-200 dark:hover:text-slate-800" >{selectedCard.image.record.user.username}</p>
+                <p className="duration-500 hover:text-gray-100 ml-1 dark:text-slate-200 dark:hover:text-slate-800" >Message {selectedCard.image.record.user.username}</p>
               </div>
             </button>
 

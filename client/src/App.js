@@ -10,6 +10,7 @@ import Login from './components/Login';
 import FileForm from './components/FileForm';
 import Home from './components/Home';
 import EditPost from './components/EditPost';
+import Landing from './components/Landing';
 
 function App() {
 
@@ -94,13 +95,13 @@ function App() {
   }
 
   function updatePost(data, id) {
-    fetch(`/posts/${id}`,{
+    fetch(`/posts/${id}`, {
       method: "PATCH",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     })
-    .then(res => res.json())
-    .then(res => console.log(res))
+      .then(res => res.json())
+      .then(res => console.log(res))
   }
 
   function deletePost(postId) {
@@ -113,7 +114,7 @@ function App() {
 
   useEffect(() => {
     userPosts()
-}, [deleted])
+  }, [deleted])
 
   return (
     <div className={darkMode ? "App dark" : "App"}>
@@ -121,8 +122,9 @@ function App() {
         <Routes>
 
           <Route path="/" element={<Home user={user} onLogout={onLogout} darkMode={darkMode} setDarkMode={setDarkMode} />}>
+            <Route path="/home" element={<Landing />} />
             <Route path="/items" element={<BrowseItems postData={postData} newPostImage={newPostImage} selectCard={handleSelect} />}>
-              <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} user={user}/>} />
+              <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} user={user} />} />
             </Route>
             <Route path="/activities" element={<MyActivities userPosts={userPosts} uploadPost={uploadPost} newPostImage={newPostImage} />}>
               <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} editPost={editPost} deletePost={deletePost} />}>
