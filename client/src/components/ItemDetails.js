@@ -28,7 +28,7 @@ const ItemDetails = ({ selectedCard, setSelectedCard, user }) => {
         </div>
         
       </div>
-      {emailFormActive ? <SendEmail user={user.username} email={user.email} selectedEmail={selectedCard.image.record.user.email} /> : null }
+      {emailFormActive ? <SendEmail user={user.username} email={user.email} selectedEmail={selectedCard.image.record.user.email} selectedUser={selectedCard.image.record.user.username}  /> : null }
       </div>
       : null
   )
