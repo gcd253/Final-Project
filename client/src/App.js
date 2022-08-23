@@ -14,12 +14,14 @@ import Landing from './components/Landing';
 
 function App() {
 
+  const storedDarkMode = JSON.parse(localStorage.getItem("DARK_MODE"));
+
   const [postData, setPostData] = useState([])
   const [newPostImage, setNewPostImage] = useState('')
   const [user, setUser] = useState({ "username": "", "email": "" })
   const [selectedCard, setSelectedCard] = useState('')
   const [userPostData, setUserPostData] = useState([])
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(storedDarkMode)
   const [deleted, setDeleted] = useState([])
   const [editId, setEditId] = useState(0)
 
@@ -115,6 +117,11 @@ function App() {
   useEffect(() => {
     userPosts()
   }, [deleted])
+
+
+  useEffect(() => {
+    localStorage.setItem("DARK_MODE", darkMode);
+  }, [darkMode]);
 
   return (
     <div className={darkMode ? "App dark" : "App"}>
