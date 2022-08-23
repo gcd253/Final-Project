@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function Signup({ onLogin, setUser }) {
+function Signup({ setUser }) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -36,10 +36,9 @@ function Signup({ onLogin, setUser }) {
     function fetchForInbox() {
         fetch("/me").then((response) => {
             if (response.ok) {
-                response.json().then((user) => setUser(user));
+                response.json().then((user) => setUser(user)).then(navigate('/'))
             }
         });
-        navigate('/')
     }
 
     return (
@@ -54,6 +53,7 @@ function Signup({ onLogin, setUser }) {
                     id="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    required
                 />
                 <label className="font-medium mt-2 mb-1 dark:text-white" htmlFor="email">Email:</label>
                 <input
@@ -63,6 +63,7 @@ function Signup({ onLogin, setUser }) {
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                 />
                 <label className="font-medium mt-2 mb-1 dark:text-white" htmlFor="password">Password:</label>
                 <input
@@ -73,6 +74,7 @@ function Signup({ onLogin, setUser }) {
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                 />
                 <label className="font-medium mt-2 mb-1 dark:text-white" htmlFor="password_confirmation">Confirm Password:</label>
                 <input
@@ -83,6 +85,7 @@ function Signup({ onLogin, setUser }) {
                     id="password_confirmation"
                     value={passwordConfirmation}
                     onChange={(e) => setPasswordConfirmation(e.target.value)}
+                    required
                 />
                 <button className="duration-500 hover:text-gray-100 m-4 bg-gray-100 pl-6 pr-6 pt-2 pb-2 rounded-full hover:bg-red-400 hover:scale-[1.02] dark:bg-slate-500 dark:hover:bg-slate-100 dark:text-slate-200 dark:hover:text-slate-800 dark:shadow-xl" type="submit" value="Post">Sign up</button>
                 <p className="text-xs italic font-semibold mt-2 mb-2 dark:text-slate-400" >Already have an account?

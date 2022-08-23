@@ -4,10 +4,10 @@ import { Outlet } from 'react-router-dom'
 
 const OfferItem = ({ data, userPosts, editPost, deletePost }) => {
   return (
-    <div className="h-screen ">
+    <div className="h-auto">
       <Outlet />
       <div>
-        {data.length > 0 ? <div className="text-gray-600 grid md:grid-cols-3 gap-10 p-14" >
+        {data.length > 0 ? <div className="text-gray-600 grid sm:grid-cols-2 md:grid-cols-3 gap-10 p-14" >
           {data.map(item => <UserPosts
             key={item.id}
             id={item.id}

@@ -91,7 +91,7 @@ function App() {
         condition: card.condition,
         category: card.category
       }))
-    navigate(`/activities/my-offers/${post_id}`)
+    navigate(`/account/my-offers/${post_id}`)
   }
 
   function updatePost(data, id) {
@@ -118,15 +118,15 @@ function App() {
 
   return (
     <div className={darkMode ? "App dark" : "App"}>
-      <div className="h-full dark:bg-slate-900" >
+      <div className="h-auto dark:bg-slate-900" >
         <Routes>
 
-          <Route path="/" element={<Home user={user} onLogout={onLogout} darkMode={darkMode} setDarkMode={setDarkMode} />}>
+          <Route path="/" element={<Home user={user} onLogout={onLogout} darkMode={darkMode} setDarkMode={setDarkMode} userPosts={userPosts} />}>
             <Route path="/home" element={<Landing />} />
             <Route path="/items" element={<BrowseItems postData={postData} newPostImage={newPostImage} selectCard={handleSelect} />}>
               <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} user={user} />} />
             </Route>
-            <Route path="/activities" element={<MyActivities userPosts={userPosts} uploadPost={uploadPost} newPostImage={newPostImage} />}>
+            <Route path="/account" element={<MyActivities userPosts={userPosts} uploadPost={uploadPost} newPostImage={newPostImage} />}>
               <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} editPost={editPost} deletePost={deletePost} />}>
                 <Route path=":id" element={<EditPost editId={editId} editDetails={editDetails} setEditDetails={setEditDetails} updatePost={updatePost} />} />
               </Route>

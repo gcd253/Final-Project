@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: "Quarto";
+  src: local("Quarto"), url("./fonts/Quarto Regular.ttf") format("truetype");
+}
+.local {
+  font-family: "Quarto", sans-serif;
+}

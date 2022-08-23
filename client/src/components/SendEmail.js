@@ -33,7 +33,7 @@ const SendEmail = ({ user, email, selectedEmail, selectedUser }) => {
     return (
         <div className="h-full flex justify-center items-center" >
 
-            <form ref={form} className="shadow-xl flex w-2/3 flex-col justify-center items-center bg-gray-300 rounded-2xl border-red-400 border-b-4 border-t-4 my-12 dark:bg-slate-800 dark:border-slate-600" onSubmit={sendEmail}>
+            <form ref={form} className="shadow-xl flex w-2/3 flex-col justify-center items-center bg-gray-300 rounded-2xl border-red-400 border-b-4 border-t-4 mt-12 dark:bg-slate-800 dark:border-slate-600" onSubmit={sendEmail}>
 
                 <label className="font-medium mt-2 mb-1 dark:text-white" >To {selectedUser}</label>
                 <textarea
@@ -41,9 +41,10 @@ const SendEmail = ({ user, email, selectedEmail, selectedUser }) => {
                     type='text'
                     name='message'
                     rows={3}
-                    placeholder='Your message'
+                    placeholder={`Your message to ${selectedUser}`}
                     value={emailMessage}
                     onChange={handleMessageChange}
+                    required
                 />
                 <button className="duration-500 hover:text-gray-100 m-4 bg-gray-100 pl-6 pr-6 pt-2 pb-2 rounded-full hover:bg-red-400 hover:scale-[1.02] dark:bg-slate-500 dark:hover:bg-slate-100 dark:text-slate-200 dark:hover:text-slate-800 dark:shadow-xl" type='submit'>Send</button>
             </form>

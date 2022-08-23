@@ -8,7 +8,7 @@ const BrowseItems = ({ postData, selectCard }) => {
     <div>
     <Outlet />
       <nav>
-        <nav className="text-gray-600 grid md:grid-cols-3 gap-10 p-14" >
+        <nav className="text-gray-600 grid sm:grid-cols-2 md:grid-cols-3 gap-10 p-14" >
           {postData.map(post => <ItemCard
             key={post.id}
             id={post.id}

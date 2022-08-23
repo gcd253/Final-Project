@@ -13,7 +13,7 @@ const sunIcon = <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill
   <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
 </svg>
 
-const Navbar = ({ onLogout, user, setDarkMode, darkMode }) => {
+const Navbar = ({ onLogout, user, setDarkMode, darkMode, userPosts }) => {
 
   function handleLogout() {
     fetch("/logout", {
@@ -35,8 +35,8 @@ const Navbar = ({ onLogout, user, setDarkMode, darkMode }) => {
       <div className="duration-200 hover:text-red-500 mx-8 font-medium dark:text-slate-400 dark:hover:text-slate-200">
         <NavLink to="/items">Browse</NavLink>
       </div>
-      <div className="duration-200 hover:text-red-500 mx-8 font-medium dark:text-slate-400 dark:hover:text-slate-200">
-        <NavLink to="/activities">My Account</NavLink>
+      <div onClick={userPosts} className="duration-200 hover:text-red-500 mx-8 font-medium dark:text-slate-400 dark:hover:text-slate-200">
+        <NavLink to="/account/my-offers">My Account</NavLink>
       </div>
       <div className="duration-200 hover:text-red-500 mx-8 font-medium dark:text-slate-400 dark:hover:text-slate-200">
         <button onClick={handleLogout} >
