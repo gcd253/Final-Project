@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function Signup({ setUser }) {
+function Signup({ currentUser }) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -36,7 +36,7 @@ function Signup({ setUser }) {
     function fetchForInbox() {
         fetch("/me").then((response) => {
             if (response.ok) {
-                response.json().then((user) => setUser(user)).then(navigate('/'))
+                response.json().then((user) => currentUser(user)).then(navigate('/'))
             }
         });
     }

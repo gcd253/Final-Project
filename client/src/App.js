@@ -129,6 +129,10 @@ function App() {
     userPosts()
   }, [deleted, edited])
 
+  function currentUser(obj) {
+    setUser(obj)
+  }
+
 
   useEffect(() => {
     localStorage.setItem("DARK_MODE", darkMode);
@@ -164,7 +168,7 @@ function App() {
           </Route>
 
           <Route path="/login" element={<Login onLogin={setUser} />} />
-          <Route path="/signup" element={<Signup onLogin={setUser} />} />
+          <Route path="/signup" element={<Signup currentUser={currentUser} />} />
           <Route
             path="*"
             element={
