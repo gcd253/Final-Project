@@ -114,7 +114,7 @@ function App() {
     })
       .then(res => res.json())
       .then(res => setEdited(res))
-      navigate('/account/my-offers')
+    navigate('/account/my-offers')
   }
 
   function deletePost(postId) {
@@ -134,6 +134,16 @@ function App() {
     localStorage.setItem("DARK_MODE", darkMode);
   }, [darkMode]);
 
+  function limit(string = '', limit = 20) {
+    if (string.length > 20) {
+      const abbreviated = string.substring(0, limit)
+      return abbreviated + "..."
+    }
+    else {
+      return string
+    }
+  }
+
   return (
     <div className={darkMode ? "App dark" : "App"}>
       <div className="h-auto dark:bg-slate-900" >
@@ -141,11 +151,11 @@ function App() {
 
           <Route path="/" element={<Home user={user} onLogout={onLogout} darkMode={darkMode} setDarkMode={setDarkMode} userPosts={userPosts} />}>
             <Route path="/home" element={<Landing />} />
-            <Route path="/items" element={<BrowseItems postData={postData} newPostImage={newPostImage} selectCard={handleSelect} scrollTo={scrollTo} />}>
+            <Route path="/items" element={<BrowseItems postData={postData} newPostImage={newPostImage} selectCard={handleSelect} scrollTo={scrollTo} limit={limit} />}>
               <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} user={user} details={details} />} />
             </Route>
             <Route path="/account" element={<MyActivities userPosts={userPosts} uploadPost={uploadPost} newPostImage={newPostImage} />}>
-              <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} editPost={editPost} deletePost={deletePost} />}>
+              <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} editPost={editPost} deletePost={deletePost} limit={limit}/>}>
                 <Route path=":id" element={<EditPost editId={editId} editDetails={editDetails} setEditDetails={setEditDetails} updatePost={updatePost} />} />
               </Route>
               <Route path="new-offer" element={<FileForm user={user} uploadPost={uploadPost} />} />

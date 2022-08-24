@@ -2,7 +2,7 @@ import { React } from 'react'
 import ItemCard from './ItemCard'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 
-const BrowseItems = ({ postData, selectCard, scrollTo }) => {
+const BrowseItems = ({ postData, selectCard, scrollTo, limit }) => {
 
   return (
     <div>
@@ -19,6 +19,7 @@ const BrowseItems = ({ postData, selectCard, scrollTo }) => {
             selectCard={selectCard}
             imageUrl={post.image}
             scrollToDetails={scrollTo}
+            limit={limit}
           />)}
         </nav>
       </nav>

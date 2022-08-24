@@ -23,14 +23,14 @@ const ItemDetails = ({ selectedCard, setSelectedCard, user, details }) => {
               <span>Close Details</span>
             </button>
             <span className="col-start-2 justify-items-start" >
-              <h2 className="text-gray-800 font-bold pt-6 dark:text-white">{selectedCard.name}</h2>
-              <h3 className="dark:text-slate-400" >{selectedCard.description}</h3>
+              <h2 className="text-gray-800 font-bold pt-6 dark:text-white mb-4">{selectedCard.name}</h2>
+              <h3 className="dark:text-slate-400 mx-6 mb-10 mt-6" >{selectedCard.description}</h3>
               <p className="text-xs dark:text-slate-400" >Category: {selectedCard.category}</p>
               <p className="text-xs dark:text-slate-400" >Condition: {selectedCard.condition} </p>
 
               <button onClick={() => setEmailFormActive(!emailFormActive)} className="duration-500 hover:text-gray-100 m-4 bg-white pl-4 pr-4 pt-2 pb-2 rounded-full hover:bg-red-400 dark:bg-slate-500 dark:hover:bg-slate-300 dark:text-slate-400 dark:shadow-xl absolute bottom-0 right-0" >
                 <div className="flex flex-row">
-                  <p className="duration-500 hover:text-gray-100 dark:text-slate-200 dark:hover:text-slate-800" >{emailFormActive ? closeIcon : envelopeIcon } </p>
+                  <p className="duration-500 hover:text-gray-100 dark:text-slate-200 dark:hover:text-slate-800" >{emailFormActive ? closeIcon : envelopeIcon}</p>
                 </div>
               </button>
 

@@ -2,7 +2,7 @@ import React from 'react'
 import UserPosts from './UserPosts'
 import { Outlet } from 'react-router-dom'
 
-const OfferItem = ({ data, userPosts, editPost, deletePost }) => {
+const OfferItem = ({ data, userPosts, editPost, deletePost, limit }) => {
   return (
     <div className="h-auto dark:bg-slate-900">
       <Outlet />
@@ -19,6 +19,7 @@ const OfferItem = ({ data, userPosts, editPost, deletePost }) => {
             userPosts={userPosts}
             editPost={editPost}
             deletePost={deletePost}
+            limit={limit}
           />)}
         </div> :
           <div className="dark:bg-slate-900" >
