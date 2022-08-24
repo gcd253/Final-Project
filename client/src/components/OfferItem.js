@@ -21,7 +21,9 @@ const OfferItem = ({ data, userPosts, editPost, deletePost }) => {
             deletePost={deletePost}
           />)}
         </div> :
-          <h1 className="my-12 dark:text-slate-400" >You don't have any posts yet!</h1>}
+          <div className="dark:bg-slate-900" >
+            <h1 className="my-12 dark:text-slate-400" >You don't have any posts yet!</h1>
+          </div>}
       </div>
     </div>
   )

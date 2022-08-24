@@ -37,7 +37,7 @@ function App() {
 
   const scrollTo = () => {
     window.scrollTo({
-      top: details.current.offsetTop,
+      top: details.current,
       behavior: 'smooth',
     });
   };
