@@ -7,7 +7,7 @@ const OfferItem = ({ data, userPosts, editPost, deletePost, limit }) => {
     <div className="h-auto dark:bg-slate-900">
       <Outlet />
       <div>
-        {data.length > 0 ? <div className="text-gray-600 grid sm:grid-cols-2 md:grid-cols-3 gap-10 p-14" >
+        {data.length > 0 ? <div className="text-gray-600 grid grid-cols-2 md:grid-cols-3 gap-10 p-14" >
           {data.map(item => <UserPosts
             key={item.id}
             id={item.id}
