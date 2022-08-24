@@ -4,7 +4,7 @@ import BrowseItems from './components/BrowseItems';
 import MyActivities from './components/MyActivities';
 import OfferItem from './components/OfferItem';
 import ItemDetails from './components/ItemDetails';
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Signup from './components/Signup';
 import Login from './components/Login';
 import FileForm from './components/FileForm';
@@ -24,6 +24,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(storedDarkMode)
   const [deleted, setDeleted] = useState([])
   const [editId, setEditId] = useState(0)
+  const [edited, setEdited] = useState([])
 
   const [editDetails, setEditDetails] = useState({
     name: "",
@@ -31,6 +32,15 @@ function App() {
     condition: "",
     category: ""
   })
+
+  const details = useRef(null);
+
+  const scrollTo = () => {
+    window.scrollTo({
+      top: details.current.offsetTop,
+      behavior: 'smooth',
+    });
+  };
 
   const navigate = useNavigate();
 
@@ -47,7 +57,7 @@ function App() {
     fetch('/posts')
       .then(res => res.json())
       .then(itemData => setPostData(itemData))
-  }, [deleted, newPostImage])
+  }, [deleted, newPostImage, edited])
 
   function uploadPost(data) {
 
@@ -74,7 +84,7 @@ function App() {
     fetch(`/posts/${id}`)
       .then(res => res.json())
       .then(card => setSelectedCard(card))
-    // navigate(`/items/${id}`)
+    scrollTo()
   }
 
   function userPosts() {
@@ -103,7 +113,8 @@ function App() {
       body: JSON.stringify(data)
     })
       .then(res => res.json())
-      .then(res => console.log(res))
+      .then(res => setEdited(res))
+      navigate('/account/my-offers')
   }
 
   function deletePost(postId) {
@@ -116,7 +127,7 @@ function App() {
 
   useEffect(() => {
     userPosts()
-  }, [deleted])
+  }, [deleted, edited])
 
 
   useEffect(() => {
@@ -130,8 +141,8 @@ function App() {
 
           <Route path="/" element={<Home user={user} onLogout={onLogout} darkMode={darkMode} setDarkMode={setDarkMode} userPosts={userPosts} />}>
             <Route path="/home" element={<Landing />} />
-            <Route path="/items" element={<BrowseItems postData={postData} newPostImage={newPostImage} selectCard={handleSelect} />}>
-              <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} user={user} />} />
+            <Route path="/items" element={<BrowseItems postData={postData} newPostImage={newPostImage} selectCard={handleSelect} scrollTo={scrollTo} />}>
+              <Route path=":id" element={<ItemDetails selectedCard={selectedCard} setSelectedCard={setSelectedCard} user={user} details={details} />} />
             </Route>
             <Route path="/account" element={<MyActivities userPosts={userPosts} uploadPost={uploadPost} newPostImage={newPostImage} />}>
               <Route path="my-offers" element={<OfferItem userPosts={userPosts} data={userPostData} editPost={editPost} deletePost={deletePost} />}>

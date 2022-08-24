@@ -1,8 +1,8 @@
-import { React, useState } from 'react'
+import { React } from 'react'
 import ItemCard from './ItemCard'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 
-const BrowseItems = ({ postData, selectCard }) => {
+const BrowseItems = ({ postData, selectCard, scrollTo }) => {
 
   return (
     <div>
@@ -18,6 +18,7 @@ const BrowseItems = ({ postData, selectCard }) => {
             category={post.category}
             selectCard={selectCard}
             imageUrl={post.image}
+            scrollToDetails={scrollTo}
           />)}
         </nav>
       </nav>

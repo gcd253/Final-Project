@@ -1,7 +1,7 @@
 import { React, useState } from 'react'
 import SendEmail from './SendEmail'
 
-const ItemDetails = ({ selectedCard, setSelectedCard, user }) => {
+const ItemDetails = ({ selectedCard, setSelectedCard, user, details }) => {
 
   const [emailFormActive, setEmailFormActive] = useState(false)
 
@@ -16,7 +16,7 @@ const ItemDetails = ({ selectedCard, setSelectedCard, user }) => {
   return (
     selectedCard ?
       <div>
-        <div className="flex justify-center" >
+        <div ref={details} className="flex justify-center" >
           <div className="bg-gray-100 rounded grid grid-cols-2 overflow-hidden shadow-md duration-500 hover:bg-gray-300 hover:scale-[1.01] w-2/3 mt-12 relative dark:bg-slate-800">
             <img src={selectedCard.image_url} alt={`User-uploaded image of ${selectedCard.name}`} />
             <button onClick={() => setSelectedCard('')} className="bg-gray-100 text-xs uppercase font-bold rounded-full p-2 absolute top-0 ml-2 mt-2 hover:scale-[1.03] duration-500 opacity-40 hover:opacity-90">

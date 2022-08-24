@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     @post.update!(post_params)
-    redirect_to @post, notice: "Post was successfully updated."
+    render json: PostandimageSerializer.new(@post).serializable_hash[:data][:attributes]
   end
 
   # My offers
@@ -51,7 +51,7 @@ private
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.permit(:name, :description, :user_id, :condition, :category, :image, :id)
+      params.permit(:name, :description, :user_id, :condition, :category, :image, :id, :post)
     end
   
 end
